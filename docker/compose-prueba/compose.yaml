@@ -1,0 +1,19 @@
+services:
+  web:
+    image: nginx
+    ports:
+      - "8081:80"
+    networks:
+      - datos-net
+    volumes:
+      - web-data:/usr/share/nginx/html
+
+
+networks:
+  datos-net:
+    driver: bridge
+
+volumes:
+  web-data:
+
+

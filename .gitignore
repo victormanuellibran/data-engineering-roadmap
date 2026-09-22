@@ -1,0 +1,22 @@
+# Variables de entorno y secretos
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Logs y temporales
+*.log
+*.tmp
+
+# Datos grandes generados por TPC-H / TPC-DS
+*.tbl
+*.dat
+
+# Archivos del sistema/editor
+.DS_Store
+Thumbs.db
