@@ -1,0 +1,93 @@
+version: 2
+
+models:
+
+  - name: stg_peliculas
+    columns:
+      - name: movie_id
+        data_tests:
+          - unique
+          - not_null
+
+      - name: nombre
+        data_tests:
+          - not_null
+
+      - name: fecha_estreno
+        data_tests:
+          - not_null
+
+
+  - name: stg_usuarios
+    columns:
+      - name: user_id
+        data_tests:
+          - unique
+          - not_null
+
+      - name: ocupacion
+        data_tests:
+          - not_null
+
+
+  - name: stg_scores
+    columns:
+      - name: user_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_usuarios')
+                field: user_id
+
+      - name: movie_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_peliculas')
+                field: movie_id
+
+      - name: rating
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3, 4, 5]
+                quote: false
+
+      - name: fecha_rating
+        data_tests:
+          - not_null
+
+
+  - name: stg_generos
+    columns:
+      - name: genero_id
+        data_tests:
+          - unique
+          - not_null
+
+      - name: genero
+        data_tests:
+          - unique
+          - not_null
+
+
+  - name: stg_pelicula_genero
+    columns:
+      - name: movie_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_peliculas')
+                field: movie_id
+
+      - name: genero_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_generos')
+                field: genero_id
